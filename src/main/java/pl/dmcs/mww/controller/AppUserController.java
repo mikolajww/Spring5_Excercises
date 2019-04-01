@@ -12,11 +12,11 @@ public class AppUserController {
 
 	@RequestMapping(value = "/appUsers")
 	public ModelAndView showAppUsers() {
-		return new ModelAndView("appUser", "appUserJSP", new AppUser());
+		return new ModelAndView("appUser", "appUser", new AppUser());
 	}
 
 	@RequestMapping(value = "addAppUser", method = RequestMethod.POST)
-	public String addAppUser(@ModelAttribute("appUserJSP") AppUser appUser) {
+	public String addAppUser(@ModelAttribute("appUser") AppUser appUser) {
 		System.out.format("First Name: %s, Last name: %s, Tel.: %s, email: %s \n",
 				appUser.getFirstName(), appUser.getLastName(),
 				appUser.getTelephone(), appUser.getEmail());
