@@ -15,18 +15,27 @@
         <tr>
             <td><form:label path="country"><spring:message code="label.country"/></form:label></td>
             <td><form:input path="country" /></td>
+            <td><form:errors path="country"/> </td>
         </tr>
         <tr>
             <td><form:label path="city"><spring:message code="label.city"/></form:label></td>
             <td><form:input path="city"/></td>
+            <td><form:errors path="city"/> </td>
         </tr>
         <tr>
             <td><form:label path="street"><spring:message code="label.street"/></form:label></td>
             <td><form:input path="street" /></td>
+            <td><form:errors path="street"/> </td>
         </tr>
         <tr>
             <td><form:label path="houseNo"><spring:message code="label.houseNo"/></form:label></td>
             <td><form:input path="houseNo" /></td>
+            <td><form:errors path="houseNo"/> </td>
+        </tr>
+        <tr>
+            <td><form:label path="postalCode"><spring:message code="label.postalCode"/></form:label></td>
+            <td><form:input path="postalCode" /></td>
+            <td><form:errors path="postalCode"/> </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -48,6 +57,7 @@
                 <th><spring:message code="label.city"/></th>
                 <th><spring:message code="label.street"/></th>
                 <th><spring:message code="label.houseNo"/></th>
+                <th><spring:message code="label.postalCode"/></th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
@@ -57,6 +67,7 @@
                     <td>${address.city} </td>
                     <td>${address.street}</td>
                     <td>${address.houseNo}</td>
+                    <td>${address.postalCode}</td>
                     <td><a href="address/delete/${address.id}.html">delete</a></td>
                     <td><a href="address.html?addressId=${address.id}">edit</a></td>
                 </tr>

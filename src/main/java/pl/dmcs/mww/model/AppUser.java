@@ -1,6 +1,8 @@
 package pl.dmcs.mww.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "appUser")
@@ -10,9 +12,17 @@ public class AppUser {
 	long id;
 
 	private int version;
+
+	@NotNull
 	@Column(name = "firstName", nullable = false)
+	@Size(min = 2, max = 30, message = "{error.size.firstName}")
 	private String firstName;
+
+	@NotNull
+	@Size(min = 2, max = 20)
 	private String lastName;
+
+	@NotNull
 	private String email;
 	private String telephone;
 

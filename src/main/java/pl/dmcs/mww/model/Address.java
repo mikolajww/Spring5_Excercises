@@ -14,6 +14,15 @@ public class Address {
 	private String houseNo;
 	private String city;
 	private String country;
+	private String postalCode;
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 
 	public long getId() {
 		return id;

@@ -3,6 +3,7 @@ package pl.dmcs.mww.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import pl.dmcs.mww.model.Address;
 import pl.dmcs.mww.model.Address;
 import pl.dmcs.mww.service.AddressService;
 import pl.dmcs.mww.service.AddressService;
+import pl.dmcs.mww.validator.AddressValidator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +22,7 @@ public class AddressController {
 
 	@Autowired
 	AddressService addressService;
+	AddressValidator addressValidator = new AddressValidator();
 
 	@RequestMapping(value = "/address")
 	public String showAddresses(Model model, HttpServletRequest request) {
@@ -37,18 +40,23 @@ public class AddressController {
 	}
 
 	@RequestMapping(value = "addAddress", method = RequestMethod.POST)
-	public String addAddress(@ModelAttribute("address") Address address) {
+	public String addAddress(@ModelAttribute("address") Address address, BindingResult result, Model model) {
 
 		System.out.println("City:" + address.getCity() +
 				" Country: " + address.getCountry() + " Street.: " +
 				address.getStreet() + " House No.: " + address.getHouseNo());
 
-		if (address.getId() == 0)
-			addressService.addAddress(address);
-		else
-			addressService.editAddress(address);
+		addressValidator.validate(address, result);
 
-		return "redirect:address.html";
+		if(result.getErrorCount() == 0) {
+			if (address.getId() == 0)
+				addressService.addAddress(address);
+			else
+				addressService.editAddress(address);
+			return "redirect:address.html";
+		}
+		model.addAttribute("addressList", addressService.listAddresses());
+		return "address";
 	}
 
 	@RequestMapping("address/delete/{addressId}")
