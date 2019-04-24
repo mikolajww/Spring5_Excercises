@@ -1,6 +1,7 @@
 package pl.dmcs.mww.configuration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -9,7 +10,7 @@ import javax.servlet.Filter;
 @Configuration
 public class Spring5Init extends AbstractAnnotationConfigDispatcherServletInitializer {
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[]{Spring5Configuration.class, HibernatePersistenceConfiguration.class};
+		return new Class[]{SecurityConfiguration.class, Spring5Configuration.class, HibernatePersistenceConfiguration.class};
 	}
 
 	protected Class<?>[] getServletConfigClasses() {
