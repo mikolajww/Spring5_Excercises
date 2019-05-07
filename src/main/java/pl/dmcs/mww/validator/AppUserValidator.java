@@ -31,7 +31,7 @@ public class AppUserValidator implements Validator {
 		}
 		if(StringUtils.hasText(((AppUser)arg0).getTelephone())) {
 			Pattern telephonePattern = Pattern.compile("\\+\\d\\d-\\d\\d\\d-\\d\\d\\d-\\d\\d\\d", Pattern.CASE_INSENSITIVE);
-			Matcher telephoneMatcher = telephonePattern.matcher(((AppUser)arg0).getEmail());
+			Matcher telephoneMatcher = telephonePattern.matcher(((AppUser)arg0).getTelephone());
 			if(!telephoneMatcher.matches()) {
 				errors.rejectValue("telephone","error.telephone.invalid");
 			}
