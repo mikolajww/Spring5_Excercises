@@ -1,4 +1,4 @@
-package pl.dmcs.mww.configuration;
+package pl.dmcs.mww.controller;
 
 
 import org.springframework.stereotype.Controller;
