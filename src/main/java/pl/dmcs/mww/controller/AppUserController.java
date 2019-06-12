@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pl.dmcs.mww.model.AppUser;
+import pl.dmcs.mww.model.AppUserRole;
+import pl.dmcs.mww.service.AddressService;
+import pl.dmcs.mww.service.AppUserRoleService;
 import pl.dmcs.mww.service.AppUserService;
 import pl.dmcs.mww.validator.AppUserValidator;
 
@@ -22,6 +25,11 @@ public class AppUserController {
 
 	@Autowired
 	AppUserService appUserService;
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	AppUserRoleService appUserRoleService;
+
 	AppUserValidator appUserValidator = new AppUserValidator();
 
 	@RequestMapping(value = "/appUsers")
@@ -29,12 +37,19 @@ public class AppUserController {
 
 		int appUserId = ServletRequestUtils.getIntParameter(request, "appUserId" , -1);
 
-		if (appUserId > 0)
+		if (appUserId > 0) {
+			AppUser appUser = appUserService.getAppUser(appUserId);
+			appUser.setPassword("");
+			appUser.setAddress(addressService.getAddress(appUserService.getAppUser(appUserId).getAddress().getId()));
+			model.addAttribute("selectedAddress", appUserService.getAppUser(appUserId).getAddress().getId());
 			model.addAttribute("appUser", appUserService.getAppUser(appUserId));
-		else
+		}
+		else {
 			model.addAttribute("appUser", new AppUser());
-
+		}
 		model.addAttribute("appUserList", appUserService.listAppUser());
+		model.addAttribute("addressList", addressService.listAddresses());
+		model.addAttribute("appUserRoleList", appUserRoleService.listAppUserRole());
 
 		return "appUser";
 	}

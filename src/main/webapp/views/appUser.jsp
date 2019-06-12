@@ -46,7 +46,27 @@
             <td><form:label path="telephone"><spring:message code="label.telephone"/></form:label></td>
             <td><form:input path="telephone" /></td>
             <td><form:errors path="telephone"/> </td>
-
+        </tr>
+        <tr>
+            <td><form:label path="pesel.pesel"><spring:message code="label.pesel"/></form:label></td>
+            <td><form:input path="pesel.pesel" /></td>
+            <td><form:errors path="pesel"/> </td>
+        </tr>
+        <tr>
+            <td><form:label path="address"><spring:message code="label.address"/></form:label></td>
+            <td><form:select path="address">
+                <c:forEach items="${addressesList}" var="address">
+                    <option value="${address.id}" ${address.id == selectedAddress ? 'selected="selected"' : ''}>${address.street}</option>
+                </c:forEach>
+            </form:select></td>
+            <td><form:errors path="address"/></td>
+        </tr>
+        <tr>
+            <td><form:label path="appUserRole"><spring:message code="label.role"/></form:label></td>
+            <td><form:select path="appUserRole" multiple="true">
+                <form:options items="${appUserRoleList}" itemValue="id" itemLabel="role"/>
+            </form:select></td>
+            <td><form:errors path="appUserRole"/></td>
         </tr>
         <tr>
             <td colspan="2">

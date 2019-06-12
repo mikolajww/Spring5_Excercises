@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import pl.dmcs.mww.utils.AddressConverter;
 
 import java.util.Locale;
 
@@ -77,5 +79,15 @@ public class Spring5Configuration implements WebMvcConfigurer {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(messageSource());
 		return bean;
+	}
+
+	@Override
+	public void addFormatters(FormatterRegistry formatterRegistry) {
+		formatterRegistry.addConverter(getMyAddressConverter());
+	}
+
+	@Bean
+	public AddressConverter getMyAddressConverter() {
+		return new AddressConverter();
 	}
 }

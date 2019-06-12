@@ -1,6 +1,7 @@
 package pl.dmcs.mww.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -15,6 +16,9 @@ public class Address {
 	private String city;
 	private String country;
 	private String postalCode;
+
+	@OneToMany(mappedBy = "address")
+	private List<AppUser> appUserList;
 
 	public String getPostalCode() {
 		return postalCode;

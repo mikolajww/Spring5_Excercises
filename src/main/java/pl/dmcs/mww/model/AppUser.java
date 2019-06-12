@@ -40,6 +40,28 @@ public class AppUser {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<AppUserRole> appUserRole = new HashSet<AppUserRole>(0);
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private Pesel pesel;
+
+	@ManyToOne
+	private Address address;
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Pesel getPesel() {
+		return pesel;
+	}
+
+	public void setPesel(Pesel pesel) {
+		this.pesel = pesel;
+	}
+
 	public long getId() {
 		return id;
 	}
